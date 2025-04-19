@@ -38,23 +38,23 @@ def generate_financial_summary(financial_statements, statement_type):
 
     summaries = []
     for i in range(len(financial_statements)):
-        date = financial_statements['date'][i]
+        date = safe_get('date')
         
         if statement_type == "Income Statement":
             summary = f"""
 For the period ending {date}, the company reported the following key income statement metrics:
-- Revenue: {financial_statements['revenue'][i]}
-- Gross Profit: {financial_statements['grossProfit'][i]}
-- Operating Income: {financial_statements['operatingIncome'][i]}
-- Net Income: {financial_statements['netIncome'][i]}
+- Revenue: {safe_get('revenue')}
+- Gross Profit: {safe_get('grossProfit')}
+- Operating Income: {safe_get('operatingIncome')}
+- Net Income: {safe_get('netIncome')}
 """
         
         elif statement_type == "Balance Sheet":
             summary = f"""
 For the period ending {date}, the company reported the following key balance sheet metrics:
-- Total Assets: {financial_statements['totalAssets'][i]}
-- Total Liabilities: {financial_statements['totalLiabilities'][i]}
-- Total Equity: {financial_statements['totalStockholdersEquity'][i]}
+- Total Assets: {safe_get('totalAssets')}
+- Total Liabilities: {safe_get('totalLiabilities')}
+- Total Equity: {safe_get('totalStockholdersEquity')}
 """
         
         elif statement_type == "Cash Flow":
