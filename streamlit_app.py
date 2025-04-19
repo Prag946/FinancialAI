@@ -35,6 +35,8 @@ def generate_financial_summary(financial_statements, statement_type):
     """
     Generate a summary of financial statements using Gemini, mimicking the GPT-based structure.
     """
+    def safe_get(col):
+        return financial_statements[col][i] if col in financial_statements.columns else "N/A"
 
     summaries = []
     for i in range(len(financial_statements)):
@@ -58,10 +60,7 @@ For the period ending {date}, the company reported the following key balance she
 """
         
         elif statement_type == "Cash Flow":
-            def safe_get(col):
-                return financial_statements[col][i] if col in financial_statements.columns else "N/A"
-
-    summary = f"""
+            summary = f"""
 For the period ending {date}, the company reported the following key cash flow metrics:
 - Operating Cash Flow: {safe_get('operatingCashFlow')}
 - Investing Cash Flow: {safe_get('cashflowFromInvestment')}
