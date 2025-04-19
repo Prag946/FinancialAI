@@ -58,14 +58,16 @@ For the period ending {date}, the company reported the following key balance she
 """
         
         elif statement_type == "Cash Flow":
-            summary = f"""
-For the period ending {date}, the company reported the following key cash flow metrics:
-- Operating Cash Flow: {financial_statements['operatingCashFlow'][i]}
-- Investing Cash Flow: {financial_statements['cashflowFromInvestment'][i]}
-- Financing Cash Flow: {financial_statements['cashflowFromFinancing'][i]}
-- Net Cash Flow: {financial_statements['netCashFlow'][i]}
-"""
+            def safe_get(col):
+                return financial_statements[col][i] if col in financial_statements.columns else "N/A"
 
+    summary = f"""
+For the period ending {date}, the company reported the following key cash flow metrics:
+- Operating Cash Flow: {safe_get('operatingCashFlow')}
+- Investing Cash Flow: {safe_get('cashflowFromInvestment')}
+- Financing Cash Flow: {safe_get('cashflowFromFinancing')}
+- Net Cash Flow: {safe_get('netCashFlow')}
+"""
         summaries.append(summary.strip())
 
     all_summaries = "\n\n".join(summaries)
