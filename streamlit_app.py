@@ -68,7 +68,7 @@ For the period ending {date}, the company reported the following key cash flow m
 - Financing Cash Flow: {safe_get('cashflowFromFinancing')}
 - Net Cash Flow: {safe_get('netCashFlow')}
 """
-        summaries.append(summary.strip())
+    summaries.append(summary.strip())
 
     all_summaries = "\n\n".join(summaries)
 
